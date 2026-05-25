@@ -5,7 +5,7 @@ import math
 # ─── Konfiguracja gry ───────────────────────────────────────────────
 SZEROKOSC = 800
 WYSOKOSC = 600
-CZAS_GRY = 30          # sekundy
+CZAS_GRY = 30
 PROMIEN_CELU = 30
 MARGINES = 60
 
