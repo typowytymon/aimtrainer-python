@@ -75,29 +75,16 @@ def sprawdz_klik(x, y):
 
 def aktualizuj_wynik():
     pisak_ui.clear()
-    pisak_ui.penup()
-
-    pisak_ui.goto(-SZEROKOSC // 2, WYSOKOSC // 2 - 55)
-    pisak_ui.pendown()
-    pisak_ui.fillcolor("#16213e")
-    pisak_ui.pencolor("#16213e")
-    pisak_ui.begin_fill()
-    for _ in range(2):
-        pisak_ui.forward(SZEROKOSC)
-        pisak_ui.right(90)
-        pisak_ui.forward(55)
-        pisak_ui.right(90)
-    pisak_ui.end_fill()
 
     pisak_ui.penup()
-    pisak_ui.goto(-SZEROKOSC // 2 + 30, WYSOKOSC // 2 - 40)
+    pisak_ui.goto(-SZEROKOSC // 2 + 20, WYSOKOSC // 2 - 30)
     pisak_ui.pencolor("#e94560")
-    pisak_ui.write(f"PUNKTY: {stan['punkty']}", font=("Courier", 18, "bold"))
+    pisak_ui.write(f"PUNKTY: {stan['punkty']}", font=("Courier", 16, "bold"))
 
-    pisak_ui.goto(SZEROKOSC // 2 - 200, WYSOKOSC // 2 - 40)
+    pisak_ui.goto(SZEROKOSC // 2 - 180, WYSOKOSC // 2 - 30)
     kolor_czasu = "#e94560" if stan["czas"] <= 5 else "#a8dadc"
     pisak_ui.pencolor(kolor_czasu)
-    pisak_ui.write(f"CZAS: {stan['czas']}s", font=("Courier", 18, "bold"))
+    pisak_ui.write(f"{stan['czas']}s", font=("Courier", 16, "bold"))
 
     ekran.update()
 
