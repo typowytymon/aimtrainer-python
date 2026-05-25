@@ -35,7 +35,6 @@ pisak_tlo.hideturtle()
 pisak_tlo.speed(0)
 
 def stworz_cel():
-    """Losuje nową pozycję celu i rysuje kółko na ekranie."""
     stan["cel_x"] = random.randint(-SZEROKOSC // 2 + MARGINES, SZEROKOSC // 2 - MARGINES)
     stan["cel_y"] = random.randint(-WYSOKOSC // 2 + MARGINES, WYSOKOSC // 2 - MARGINES - 60)
 
