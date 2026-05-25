@@ -2,14 +2,12 @@ import turtle
 import random
 import math
 
-# ─── Konfiguracja gry ───────────────────────────────────────────────
 SZEROKOSC = 800
 WYSOKOSC = 600
-CZAS_GRY = 30          # sekundy
+CZAS_GRY = 30
 PROMIEN_CELU = 30
 MARGINES = 60
 
-# ─── Stan gry ───────────────────────────────────────────────────────
 stan = {
     "punkty": 0,
     "czas": CZAS_GRY,
@@ -18,14 +16,12 @@ stan = {
     "cel_y": 0,
 }
 
-# ─── Konfiguracja ekranu ─────────────────────────────────────────────
 ekran = turtle.Screen()
 ekran.title("🎯 Kliknij cel!")
 ekran.bgcolor("#000")
 ekran.setup(width=SZEROKOSC, height=WYSOKOSC)
 ekran.tracer(0)
 
-# ─── Żółwie (rysowniki) ──────────────────────────────────────────────
 pisak_cel = turtle.Turtle()
 pisak_cel.hideturtle()
 pisak_cel.speed(0)
@@ -38,11 +34,6 @@ pisak_tlo = turtle.Turtle()
 pisak_tlo.hideturtle()
 pisak_tlo.speed(0)
 
-
-# ════════════════════════════════════════════════════════════════════
-#  FUNKCJE GRY
-# ════════════════════════════════════════════════════════════════════
-
 def stworz_cel():
     """Losuje nową pozycję celu i rysuje kółko na ekranie."""
     stan["cel_x"] = random.randint(-SZEROKOSC // 2 + MARGINES, SZEROKOSC // 2 - MARGINES)
@@ -53,7 +44,6 @@ def stworz_cel():
     pisak_cel.goto(stan["cel_x"], stan["cel_y"] - PROMIEN_CELU)
     pisak_cel.pendown()
 
-    # Zewnętrzny pierścień (biały)
     pisak_cel.fillcolor("#e94560")
     pisak_cel.pencolor("#ffffff")
     pisak_cel.pensize(3)
@@ -61,7 +51,6 @@ def stworz_cel():
     pisak_cel.circle(PROMIEN_CELU)
     pisak_cel.end_fill()
 
-    # Wewnętrzny punkt (biały)
     pisak_cel.penup()
     pisak_cel.goto(stan["cel_x"], stan["cel_y"] - 10)
     pisak_cel.pendown()
@@ -75,7 +64,6 @@ def stworz_cel():
 
 
 def sprawdz_klik(x, y):
-    """Sprawdza czy gracz kliknął w cel. Jeśli tak – dodaje punkt i przesuwa cel."""
     if not stan["aktywna"]:
         return
 
@@ -88,11 +76,9 @@ def sprawdz_klik(x, y):
 
 
 def aktualizuj_wynik():
-    """Odświeża pasek UI z punktami i czasem."""
     pisak_ui.clear()
     pisak_ui.penup()
 
-    # Tło paska UI
     pisak_ui.goto(-SZEROKOSC // 2, WYSOKOSC // 2 - 55)
     pisak_ui.pendown()
     pisak_ui.fillcolor("#16213e")
@@ -105,13 +91,11 @@ def aktualizuj_wynik():
         pisak_ui.right(90)
     pisak_ui.end_fill()
 
-    # Punkty
     pisak_ui.penup()
     pisak_ui.goto(-SZEROKOSC // 2 + 30, WYSOKOSC // 2 - 40)
     pisak_ui.pencolor("#e94560")
     pisak_ui.write(f"PUNKTY: {stan['punkty']}", font=("Courier", 18, "bold"))
 
-    # Czas
     pisak_ui.goto(SZEROKOSC // 2 - 200, WYSOKOSC // 2 - 40)
     kolor_czasu = "#e94560" if stan["czas"] <= 5 else "#a8dadc"
     pisak_ui.pencolor(kolor_czasu)
@@ -121,7 +105,6 @@ def aktualizuj_wynik():
 
 
 def efekt_trafienia():
-    """Krótki efekt wizualny po trafieniu w cel."""
     pisak_tlo.clear()
     pisak_tlo.penup()
     pisak_tlo.goto(stan["cel_x"], stan["cel_y"] - PROMIEN_CELU - 15)
@@ -134,7 +117,6 @@ def efekt_trafienia():
 
 
 def odliczanie():
-    """Odlicza czas co sekundę. Kończy grę gdy czas = 0."""
     if not stan["aktywna"]:
         return
     if stan["czas"] > 0:
@@ -146,12 +128,10 @@ def odliczanie():
 
 
 def koniec_gry():
-    """Wyświetla ekran końca gry."""
     stan["aktywna"] = False
     pisak_cel.clear()
     pisak_tlo.clear()
 
-    # Przyciemnione tło
     pisak_tlo.penup()
     pisak_tlo.goto(-SZEROKOSC // 2, -WYSOKOSC // 2)
     pisak_tlo.pendown()
@@ -164,7 +144,6 @@ def koniec_gry():
     pisak_tlo.goto(-SZEROKOSC // 2, -WYSOKOSC // 2)
     pisak_tlo.end_fill()
 
-    # Tekst końca gry
     pisak_tlo.penup()
     pisak_tlo.goto(0, 80)
     pisak_tlo.pencolor("#e94560")
@@ -179,7 +158,6 @@ def koniec_gry():
     pisak_tlo.pencolor("#f5a623")
     pisak_tlo.write(ocena, align="center", font=("Courier", 16, "normal"))
 
-    # Przycisk restart
     pisak_tlo.goto(0, -110)
     pisak_tlo.pencolor("#a8dadc")
     pisak_tlo.write("[ Kliknij tutaj aby zagrać ponownie ]",
@@ -200,7 +178,6 @@ def oceń_wynik(punkty):
 
 
 def restart_gry():
-    """Resetuje stan gry i zaczyna od nowa."""
     stan["punkty"] = 0
     stan["czas"] = CZAS_GRY
     stan["aktywna"] = True
@@ -215,16 +192,10 @@ def restart_gry():
 
 
 def obsluga_klikniecia(x, y):
-    """Globalny handler kliknięcia – restart lub sprawdzenie celu."""
     if not stan["aktywna"]:
         restart_gry()
     else:
         sprawdz_klik(x, y)
-
-
-# ════════════════════════════════════════════════════════════════════
-#  EKRAN STARTOWY
-# ════════════════════════════════════════════════════════════════════
 
 def ekran_startowy():
     pisak_tlo.penup()
@@ -248,8 +219,6 @@ def ekran_startowy():
 
     ekran.update()
 
-
-# ─── Start ──────────────────────────────────────────────────────────
 ekran_startowy()
 ekran.onclick(obsluga_klikniecia)
 ekran.listen()
