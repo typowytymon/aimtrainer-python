@@ -1,0 +1,2 @@
+# aimtrainer-python
+self explanatory
