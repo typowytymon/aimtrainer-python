@@ -69,7 +69,6 @@ def sprawdz_klik(x, y):
     odleglosc = math.sqrt((x - stan["cel_x"]) ** 2 + (y - stan["cel_y"]) ** 2)
     if odleglosc <= PROMIEN_CELU:
         stan["punkty"] += 1
-        efekt_trafienia()
         stworz_cel()
         aktualizuj_wynik()
 
@@ -102,17 +101,6 @@ def aktualizuj_wynik():
 
     ekran.update()
 
-
-def efekt_trafienia():
-    pisak_tlo.clear()
-    pisak_tlo.penup()
-    pisak_tlo.goto(stan["cel_x"], stan["cel_y"] - PROMIEN_CELU - 15)
-    pisak_tlo.pendown()
-    pisak_tlo.pencolor("#f5a623")
-    pisak_tlo.pensize(4)
-    pisak_tlo.circle(PROMIEN_CELU + 15)
-    ekran.update()
-    ekran.ontimer(lambda: (pisak_tlo.clear(), ekran.update()), 150)
 
 
 def odliczanie():
