@@ -17,7 +17,7 @@ stan = {
 }
 
 ekran = turtle.Screen()
-ekran.title("🎯 Kliknij cel!")
+ekran.title("aimtrainer")
 ekran.bgcolor("#000")
 ekran.setup(width=SZEROKOSC, height=WYSOKOSC)
 ekran.tracer(0)
@@ -35,7 +35,6 @@ pisak_tlo.hideturtle()
 pisak_tlo.speed(0)
 
 def stworz_cel():
-    """Losuje nową pozycję celu i rysuje kółko na ekranie."""
     stan["cel_x"] = random.randint(-SZEROKOSC // 2 + MARGINES, SZEROKOSC // 2 - MARGINES)
     stan["cel_y"] = random.randint(-WYSOKOSC // 2 + MARGINES, WYSOKOSC // 2 - MARGINES - 60)
 
@@ -147,11 +146,11 @@ def koniec_gry():
     pisak_tlo.penup()
     pisak_tlo.goto(0, 80)
     pisak_tlo.pencolor("#e94560")
-    pisak_tlo.write("KONIEC GRY!", align="center", font=("Courier", 36, "bold"))
+    pisak_tlo.write("KONIEC GRY", align="center", font=("Courier", 36, "bold"))
 
     pisak_tlo.goto(0, 10)
     pisak_tlo.pencolor("#ffffff")
-    pisak_tlo.write(f"Twój wynik: {stan['punkty']} pkt", align="center", font=("Courier", 24, "bold"))
+    pisak_tlo.write(f"Twój wynik: {stan['punkty']}", align="center", font=("Courier", 24, "bold"))
 
     ocena = oceń_wynik(stan["punkty"])
     pisak_tlo.goto(0, -40)
@@ -160,7 +159,7 @@ def koniec_gry():
 
     pisak_tlo.goto(0, -110)
     pisak_tlo.pencolor("#a8dadc")
-    pisak_tlo.write("[ Kliknij tutaj aby zagrać ponownie ]",
+    pisak_tlo.write("Kliknij tutaj aby zagrać ponownie",
                     align="center", font=("Courier", 14, "normal"))
 
     ekran.update()
@@ -168,13 +167,13 @@ def koniec_gry():
 
 def oceń_wynik(punkty):
     if punkty >= 20:
-        return "⭐ Mistrz celności! Niesamowite!"
+        return "Wspaniale"
     elif punkty >= 12:
-        return "👍 Bardzo dobry wynik! Tak trzymaj!"
+        return "Bardzo dobrze"
     elif punkty >= 6:
-        return "🙂 Nieźle! Poćwicz jeszcze trochę."
+        return "Nie źle"
     else:
-        return "😅 Trudne, prawda? Spróbuj jeszcze raz!"
+        return "może następnym razem"
 
 
 def restart_gry():
@@ -201,21 +200,21 @@ def ekran_startowy():
     pisak_tlo.penup()
     pisak_tlo.goto(0, 120)
     pisak_tlo.pencolor("#e94560")
-    pisak_tlo.write("🎯 KLIKNIJ CEL!", align="center", font=("Courier", 38, "bold"))
+    pisak_tlo.write("KLIKNIJ CEL", align="center", font=("Courier", 38, "bold"))
 
     pisak_tlo.goto(0, 50)
     pisak_tlo.pencolor("#a8dadc")
-    pisak_tlo.write("Klikaj czerwone kółka jak najszybciej!", align="center",
+    pisak_tlo.write("Klikaj czerwone kółka jak najszybciej", align="center",
                     font=("Courier", 15, "normal"))
 
     pisak_tlo.goto(0, 10)
     pisak_tlo.pencolor("#ffffff")
-    pisak_tlo.write(f"Masz {CZAS_GRY} sekund. Każde trafienie = 1 punkt.",
+    pisak_tlo.write(f"Masz {CZAS_GRY} sekund",
                     align="center", font=("Courier", 13, "normal"))
 
     pisak_tlo.goto(0, -60)
     pisak_tlo.pencolor("#f5a623")
-    pisak_tlo.write("[ Kliknij aby rozpocząć ]", align="center", font=("Courier", 16, "bold"))
+    pisak_tlo.write("Kliknij aby rozpocząć", align="center", font=("Courier", 16, "bold"))
 
     ekran.update()
 
