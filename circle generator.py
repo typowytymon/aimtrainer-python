@@ -2,13 +2,13 @@ import turtle
 import random
 
 def spawn_cel(max_radius):
-   t = turtle.Turtle()
-   t.speed(0)
-   t.hideturtle()
+    t = turtle.Turtle()
+    t.speed(0)
+    t.hideturtle()
 
-   screen = turtle.Screen()
-   w = screen.window_width() // 2
-   h = screen.windowheight() // 2
+    screen = turtle.Screen()
+    w = screen.window_width() // 2
+    h = screen.windowheight() // 2
 
 
     x = random.randint(-w, w)
